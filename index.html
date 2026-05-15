@@ -19,6 +19,7 @@
                 <button class="nav-btn" data-page="gallery">素材库</button>
                 <button class="nav-btn" data-page="workshop">创作工坊</button>
                 <button class="nav-btn" data-page="converter">照片转换</button>
+                <button class="nav-btn" data-page="beadPattern">拼豆图纸</button>
             </div>
         </nav>
 
@@ -45,6 +46,11 @@
                                 <div class="card-icon">📷</div>
                                 <h3>照片转换</h3>
                                 <p>照片秒变像素风</p>
+                            </div>
+                            <div class="feature-card" onclick="switchPage('beadPattern')">
+                                <div class="card-icon">🔴</div>
+                                <h3>拼豆图纸</h3>
+                                <p>图片转拼豆图纸</p>
                             </div>
                         </div>
                     </div>
@@ -137,6 +143,85 @@
                             <h4>像素化</h4>
                             <canvas id="pixelatedCanvas"></canvas>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-beadPattern" class="page">
+                <div class="bead-pattern-container">
+                    <h2>拼豆图纸生成器</h2>
+                    <div class="bead-pattern-layout">
+                        <div class="bead-upload-panel">
+                            <div class="bead-upload-area" id="beadUploadArea">
+                                <input type="file" id="beadFileInput" accept="image/*" hidden>
+                                <div class="bead-upload-content">
+                                    <div class="bead-upload-icon">🔴</div>
+                                    <p>上传图片<br>生成拼豆图纸</p>
+                                </div>
+                            </div>
+                            <div class="bead-controls">
+                                <div class="control-group">
+                                    <label>拼豆品牌</label>
+                                    <select id="beadBrandSelect">
+                                        <option value="mard" selected>MARD (221色)</option>
+                                        <option value="perler">Perler</option>
+                                        <option value="hama">Hama</option>
+                                        <option value="artkal">Artkal</option>
+                                        <option value="nabbi">Nabbi</option>
+                                        <option value="simbrix">Simbrix</option>
+                                    </select>
+                                </div>
+                                <div class="control-group">
+                                    <label>最大尺寸</label>
+                                    <select id="beadSizeSelect">
+                                        <option value="30">30 豆</option>
+                                        <option value="50" selected>50 豆</option>
+                                        <option value="70">70 豆</option>
+                                        <option value="100">100 豆</option>
+                                        <option value="150">150 豆</option>
+                                        <option value="200">200 豆</option>
+                                    </select>
+                                </div>
+                                <div class="control-group">
+                                    <label>图纸尺寸</label>
+                                    <div style="display: flex; gap: 8px; align-items: center;">
+                                        <input type="number" id="beadWidthInput" min="10" max="300" value="50" style="width: 70px; padding: 4px;">
+                                        <span>×</span>
+                                        <input type="number" id="beadHeightInput" min="10" max="300" value="50" style="width: 70px; padding: 4px;">
+                                        <span style="font-size: 12px; color: #999;">豆</span>
+                                    </div>
+                                </div>
+                                <div class="control-group" style="flex-direction: row; gap: 8px;">
+                                    <button id="autoSizeBtn" class="bead-generate-btn" style="padding: 6px 12px; font-size: 12px;">按原图比例</button>
+                                </div>
+                                <div class="control-group">
+                                    <label>颜色数量</label>
+                                    <input type="range" id="beadColorSlider" min="4" max="48" value="16">
+                                    <span id="beadColorValue">16</span>
+                                </div>
+                                <div class="control-group checkbox">
+                                    <input type="checkbox" id="beadDitheringCheck" checked>
+                                    <label for="beadDitheringCheck">启用抖动</label>
+                                </div>
+                                <button class="bead-generate-btn" id="generatePatternBtn">生成图纸</button>
+                                <button class="bead-export-btn" id="exportPatternBtn">导出图纸</button>
+                                <button class="bead-export-btn" id="exportListBtn">导出购物清单</button>
+                            </div>
+                        </div>
+                        <div class="bead-preview-panel">
+                            <div class="bead-preview-box">
+                                <h4>原图</h4>
+                                <canvas id="beadOriginalCanvas"></canvas>
+                            </div>
+                            <div class="bead-preview-box">
+                                <h4>图纸预览</h4>
+                                <canvas id="beadPatternCanvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bead-color-stats" id="beadColorStats">
+                        <h3>用豆统计</h3>
+                        <div class="bead-color-list" id="beadColorList"></div>
                     </div>
                 </div>
             </section>
