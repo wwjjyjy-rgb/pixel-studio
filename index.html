@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>像素工坊 - 像素风艺术创作平台</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="pixel-nav">
+            <div class="nav-brand">
+                <span class="brand-icon">⬛</span>
+                <span class="brand-text">像素工坊</span>
+            </div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-page="home">首页</button>
+                <button class="nav-btn" data-page="gallery">素材库</button>
+                <button class="nav-btn" data-page="workshop">创作工坊</button>
+                <button class="nav-btn" data-page="converter">照片转换</button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <section id="page-home" class="page active">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            <span class="pixel-text">像素工坊</span>
+                        </h1>
+                        <p class="hero-subtitle">创造属于你的像素艺术世界</p>
+                        <div class="hero-cards">
+                            <div class="feature-card" onclick="switchPage('gallery')">
+                                <div class="card-icon">🎨</div>
+                                <h3>素材库</h3>
+                                <p>海量像素素材随心用</p>
+                            </div>
+                            <div class="feature-card" onclick="switchPage('workshop')">
+                                <div class="card-icon">✏️</div>
+                                <h3>创作工坊</h3>
+                                <p>自由拼接创作像素画</p>
+                            </div>
+                            <div class="feature-card" onclick="switchPage('converter')">
+                                <div class="card-icon">📷</div>
+                                <h3>照片转换</h3>
+                                <p>照片秒变像素风</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-gallery" class="page">
+                <div class="gallery-header">
+                    <h2>素材库</h2>
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-category="all">全部</button>
+                        <button class="filter-btn" data-category="plant">植物</button>
+                        <button class="filter-btn" data-category="building">建筑</button>
+                        <button class="filter-btn" data-category="character">人物</button>
+                        <button class="filter-btn" data-category="decoration">装饰</button>
+                    </div>
+                </div>
+                <div class="gallery-grid" id="galleryGrid"></div>
+            </section>
+
+            <section id="page-workshop" class="page">
+                <div class="workshop-layout">
+                    <div class="workshop-panel left-panel">
+                        <h3>素材面板</h3>
+                        <div class="assets-list" id="assetsList"></div>
+                    </div>
+                    <div class="workshop-canvas-area">
+                        <div class="canvas-toolbar">
+                            <button class="tool-btn" id="clearCanvasBtn">清空画布</button>
+                            <button class="tool-btn" id="exportCanvasBtn">导出作品</button>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="workshopCanvas" width="640" height="480"></canvas>
+                        </div>
+                    </div>
+                    <div class="workshop-panel right-panel">
+                        <h3>图层管理</h3>
+                        <div class="layers-list" id="layersList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-converter" class="page">
+                <div class="converter-container">
+                    <h2>照片像素化转换</h2>
+                    <div class="converter-layout">
+                        <div class="converter-upload">
+                            <div class="upload-area" id="uploadArea">
+                                <input type="file" id="fileInput" accept="image/*" hidden>
+                                <div class="upload-content">
+                                    <div class="upload-icon">📁</div>
+                                    <p>拖拽照片到此处<br>或点击上传</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="converter-controls">
+                            <div class="control-group">
+                                <label>像素大小</label>
+                                <input type="range" id="pixelSizeSlider" min="4" max="32" value="8">
+                                <span id="pixelSizeValue">8</span>
+                            </div>
+                            <div class="control-group">
+                                <label>色彩数量</label>
+                                <input type="range" id="colorCountSlider" min="2" max="256" value="16">
+                                <span id="colorCountValue">16</span>
+                            </div>
+                            <div class="control-group checkbox">
+                                <input type="checkbox" id="ditheringCheck" checked>
+                                <label for="ditheringCheck">启用抖动</label>
+                            </div>
+                            <div class="control-group">
+                                <label>调色板</label>
+                                <select id="paletteSelect">
+                                    <option value="retro">复古</option>
+                                    <option value="8bit">8位</option>
+                                    <option value="16bit">16位</option>
+                                    <option value="full">全彩</option>
+                                </select>
+                            </div>
+                            <button class="convert-btn" id="convertBtn">应用效果</button>
+                            <button class="convert-btn" id="exportConvertedBtn">导出图片</button>
+                        </div>
+                    </div>
+                    <div class="converter-preview">
+                        <div class="preview-box">
+                            <h4>原图</h4>
+                            <canvas id="originalCanvas"></canvas>
+                        </div>
+                        <div class="preview-box">
+                            <h4>像素化</h4>
+                            <canvas id="pixelatedCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
